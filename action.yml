@@ -10,6 +10,14 @@ inputs:
     description: 'file name'
     required: false
     default: 'vulnAnalysis'
+  token:
+    description: 'jira authentication token'
+    required: true
+    default: ''
+  jira_url:
+    description: "jira host url"
+    required: true
+    default: ''
 outputs:
   ticketLists: # id of output
     description: 'List of alerts which need a ticket'
