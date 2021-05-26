@@ -32,7 +32,7 @@ const main = async () => {
     body:''
   }
   let content = await fs.readFile(path, 'utf8');
-  let content = JSON.parse(content);
+  content = JSON.parse(content);
   resultSet=content.data.repository.vulnerabilityAlerts;
   totalAlerts=resultSet.totalCount;
   vulnList=resultSet.nodes;
