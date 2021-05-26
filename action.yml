@@ -5,7 +5,11 @@ inputs:
   path:  # id of input
     description: 'File path'
     required: true
-    default: 'vuln-analysis.yaml'
+    default: 'vulnAnalysis.json'
+  name:
+    description: 'file name'
+    required: false
+    default: 'vulnAnalysis'
 outputs:
   ticketLists: # id of output
     description: 'List of alerts which need a ticket'

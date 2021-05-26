@@ -7,7 +7,7 @@ const main = async () => {
   const nameToGreet = core.getInput('path');
   console.log(`reading ${path}!....`);
   let content = await fs.readFile(path, 'utf8')
-  core.setOutput("vulnAlerts", content);
+  core.setOutput("ticketLists", content);
   // Get the JSON webhook payload for the event that triggered the workflow
   const payload = JSON.stringify(github.context.payload, undefined, 2)
   console.log(`The event payload: ${payload}`);
