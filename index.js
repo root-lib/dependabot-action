@@ -7,6 +7,7 @@ const main = async () => {
   const path = core.getInput('path');
   console.log(`reading ${path}!....`);
   let content = await fs.readFile(path, 'utf8');
+  let content = JSON.parse(content);
   resultSet=content.data.repository.vulnerabilityAlerts;
   totalAlerts=resultSet.totalCount;
   vulnList=resultSet.nodes;
