@@ -25,7 +25,7 @@ const main = async () => {
   const path = core.getInput('path');
   console.log(`reading ${path}!....`);
   jira_headers.Authorization='Basic '+core.getInput('token');
-  const url = core.getInput('url');
+  const url = core.getInput('jira_url');
   var config={
     method: 'POST',
     headers: jira_headers,
