@@ -46,13 +46,13 @@ const main = async () => {
       jira_body.description="Autocreated for dependabot alerts from github for"+packageName;
       config.body=jira_body;
       const rawResponse = await fetch(url,config);
-      const jsonResponse = await rrawResponse.json();
+      const jsonResponse = await rawResponse.json();
       console.log(jsonResponse);
     }
   });
   core.setOutput("ticketLists", content);
   // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(github.context.payload, undefined, 2)
+  //const payload = JSON.stringify(github.context.payload, undefined, 2)
   //console.log(`The event payload: ${payload}`);
 
 }
