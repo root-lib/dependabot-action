@@ -3,10 +3,10 @@ const github = require('@actions/github');
 const { promises: fs } = require('fs')
 
 const main = async () => {
-  // `who-to-greet` input defined in action metadata file
-  //const path = core.getInput('path');
+
+  const path = core.getInput('path');
   console.log(`reading ${path}!....`);
-  //let content = await fs.readFile(path, 'utf8');
+  let content = await fs.readFile(path, 'utf8');
   resultSet=content.data.repository.vulnerabilityAlerts;
   totalAlerts=resultSet.totalCount;
   vulnList=resultSet.nodes;
