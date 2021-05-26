@@ -4,7 +4,7 @@ const { promises: fs } = require('fs')
 
 const main = async () => {
   // `who-to-greet` input defined in action metadata file
-  const nameToGreet = core.getInput('path');
+  const path = core.getInput('path');
   console.log(`reading ${path}!....`);
   let content = await fs.readFile(path, 'utf8')
   core.setOutput("ticketLists", content);
