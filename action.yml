@@ -1,13 +1,14 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'OSS analysis'
+description: 'Analyse the dependabot alerts'
+author: 'libin'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  path:  # id of input
+    description: 'File path'
     required: true
-    default: 'World'
+    default: 'vuln-analysis.yaml'
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  ticketLists: # id of output
+    description: 'List of alerts which need a ticket'
 runs:
   using: 'node12'
   main: 'index.js'
