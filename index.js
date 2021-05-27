@@ -118,7 +118,7 @@ const main = async () => {
         }
         console.log(res.statusCode);
         console.log(data.toString());
-      });
+      }).catch(err => {console.log("jira request failed");})
     }
   });
   //core.setOutput("ticketLists", content);
