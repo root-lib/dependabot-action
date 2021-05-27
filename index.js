@@ -112,13 +112,10 @@ const main = async () => {
       jira_body.summary="dependabot-"+packageName+"-"+createdDate;
       jira_body.description="Auto created for dependabot alerts from github for"+packageName;
       config.data=jira_body;
-      var req = urllib.request(url,config,function(err,data,res){
-        if (err) {
-          throw err; // you need to handle error
-        }
-        console.log(res.statusCode);
-        console.log(data.toString());
-      }).catch(err => {console.log("jira request failed");})
+      var req = urllib.request(url,config).then(function(result){
+        console.log(result.res.statusCode);
+        console.log(result.data.toString());
+      }).error(err => {console.log("jira request failed");})
     }
   });
   //core.setOutput("ticketLists", content);
