@@ -36,7 +36,7 @@ const main = async () => {
   resultSet=content.data.repository.vulnerabilityAlerts;
   totalAlerts=resultSet.totalCount;
   vulnList=resultSet.nodes;
-  vulnList.forEach(element => {
+  vulnList.forEach(async(element) => {
     createdDate=element.createdDate;
     packageName=element.securityVulnerability.package.packageName;
     var days =  Math.floor((Date.parse(new Date())-Date.parse(createdDate)  ) / 86400000);
