@@ -102,6 +102,7 @@ const main = async () => {
   resultSet=content.repository.vulnerabilityAlerts;
   totalAlerts=resultSet.totalCount;
   vulnList=resultSet.nodes;
+  var ticketLists={}
   vulnList.forEach(async(element) => {
 
     createdDate=element.createdAt;
@@ -114,11 +115,12 @@ const main = async () => {
       config.data=jira_body;
       var req = urllib.request(url,config).then(function(result){
         console.log(result.res.statusCode);
-        console.log(result.data.toString());
+        console.log(result.data.toJSON());
+        ticketLists[packageName]=result.data.toJSON();
       }).catch(err => {console.log("jira request failed");})
     }
   });
-  //core.setOutput("ticketLists", content);
+  core.setOutput("ticketLists", content);
   // Get the JSON webhook payload for the event that triggered the workflow
   //const payload = JSON.stringify(github.context.payload, undefined, 2)
   //console.log(`The event payload: ${payload}`);
