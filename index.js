@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const { promises: fs } = require('fs');
-import { GraphQLClient, gql } from 'graphql-request';
+const { GraphQLClient, gql } = require('graphql-request');
 var urllib = require('urllib');
 
 
@@ -98,7 +98,7 @@ const main = async () => {
     data:''
   }
   const githubClient = new GraphQLClient(githubUrl);
-  var content = await client.request(githubQuery, githubVars, requestHeaders);
+  var content = await githubClient.request(githubQuery, githubVars, requestHeaders);
 
   resultSet=content.data.repository.vulnerabilityAlerts;
   totalAlerts=resultSet.totalCount;
