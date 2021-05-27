@@ -18,6 +18,14 @@ inputs:
     description: "jira host url"
     required: true
     default: ''
+  github_url:
+    description: "github host url"
+    required: true
+    default: ''
+  github_token:
+    description: "jira host url"
+    required: true
+    default: ''
 outputs:
   ticketLists: # id of output
     description: 'List of alerts which need a ticket'

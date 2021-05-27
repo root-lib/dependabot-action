@@ -1,8 +1,38 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const { promises: fs } = require('fs');
+import { GraphQLClient, gql } from 'graphql-request';
 var urllib = require('urllib');
-jira_body={
+
+
+const githubQuery = gql`
+query ($owner:String!, $name:String!){
+  repository(owner:$owner, name:$name) {
+      vulnerabilityAlerts(last:10){
+          totalCount #total alerts raised for this repo
+          nodes{
+              createdAt #returns when the vulnerability is created
+              securityVulnerability{
+                  package{
+                      name # name of the package/library
+                  }
+                  severity # severity could be CRITICAL, HIGH, MEDIUM...
+              }
+          }
+      }
+  }
+}
+`
+
+const githubVars = {owner:"root-lib",name:"dependabot-demo"}
+
+const requestHeaders = {
+  'Accept': 'application/json',
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer '
+}
+
+var jira_body={
   "fields": {
      "project":
      {
@@ -48,7 +78,7 @@ jira_body={
      }
  }
 }
-jira_headers={
+var jira_headers={
   'Accept': 'application/json',
   'Content-Type': 'application/json',
   'Authorization': ''
@@ -56,8 +86,10 @@ jira_headers={
 
 const main = async () => {
 
-  const path = core.getInput('path');
-  console.log(`reading ${path}!....`);
+
+  const githubUrl=core.getInput('github_url');
+  const githubToken=core.getInput('github_token');
+  requestHeaders.Authorization='Bearer '+githubToken
   jira_headers.Authorization='Basic '+core.getInput('token');
   const url = core.getInput('jira_url');
   var config={
@@ -65,8 +97,9 @@ const main = async () => {
     headers: jira_headers,
     data:''
   }
-  let content = await fs.readFile(path, 'utf8');
-  content = JSON.parse(content);
+  const githubClient = new GraphQLClient(githubUrl);
+  var content = await client.request(githubQuery, githubVars, requestHeaders);
+
   resultSet=content.data.repository.vulnerabilityAlerts;
   totalAlerts=resultSet.totalCount;
   vulnList=resultSet.nodes;
