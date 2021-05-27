@@ -79,9 +79,9 @@ const main = async () => {
       jira_body.summary="dependabot-"+packageName+"-"+createdDate;
       jira_body.description="Auto created for dependabot alerts from github for"+packageName;
       config.body=jira_body;
-      const rawResponse = await fetch(url,config);
-      const jsonResponse = await rawResponse.json();
-      console.log(jsonResponse);
+      const rawResponse = fetch(url,config).then(response => response.json()).then(data  =>{
+        console.log(data);
+      }) 
     }
   });
   //core.setOutput("ticketLists", content);
