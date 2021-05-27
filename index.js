@@ -120,7 +120,7 @@ const main = async () => {
       }).catch(err => {console.log("jira request failed");})
     }
   });
-  core.setOutput("ticketLists", content);
+  core.setOutput("ticketLists", ticketLists);
   // Get the JSON webhook payload for the event that triggered the workflow
   //const payload = JSON.stringify(github.context.payload, undefined, 2)
   //console.log(`The event payload: ${payload}`);
