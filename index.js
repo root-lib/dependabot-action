@@ -99,8 +99,7 @@ const main = async () => {
   }
   const githubClient = new GraphQLClient(githubUrl);
   var content = await githubClient.request(githubQuery, githubVars, requestHeaders);
-  console.log(content);
-  resultSet=content.data.repository.vulnerabilityAlerts;
+  resultSet=content.repository.vulnerabilityAlerts;
   totalAlerts=resultSet.totalCount;
   vulnList=resultSet.nodes;
   vulnList.forEach(async(element) => {
