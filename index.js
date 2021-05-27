@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const { promises: fs } = require('fs');
+var urllib = require('urllib');
 jira_body={
   "fields": {
      "project":
@@ -62,7 +63,7 @@ const main = async () => {
   var config={
     method: 'POST',
     headers: jira_headers,
-    body:''
+    data:''
   }
   let content = await fs.readFile(path, 'utf8');
   content = JSON.parse(content);
@@ -78,10 +79,14 @@ const main = async () => {
       console.log(`${packageName} created at ${createdDate}`);
       jira_body.summary="dependabot-"+packageName+"-"+createdDate;
       jira_body.description="Auto created for dependabot alerts from github for"+packageName;
-      config.body=jira_body;
-      const rawResponse = fetch(url,config).then(response => response.json()).then(data  =>{
-        console.log(data);
-      }) 
+      config.data=jira_body;
+      var req = urllib.request(url,config,function(err,data,res){
+        if (err) {
+          throw err; // you need to handle error
+        }
+        console.log(res.statusCode);
+        console.log(data.toString());
+      });
     }
   });
   //core.setOutput("ticketLists", content);
