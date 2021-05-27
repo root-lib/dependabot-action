@@ -115,7 +115,7 @@ const main = async () => {
       var req = urllib.request(url,config).then(function(result){
         console.log(result.res.statusCode);
         console.log(result.data.toString());
-      }).error(err => {console.log("jira request failed");})
+      }).catch(err => {console.log("jira request failed");})
     }
   });
   //core.setOutput("ticketLists", content);
