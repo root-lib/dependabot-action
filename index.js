@@ -72,7 +72,7 @@ const main = async () => {
   vulnList.forEach(async(element) => {
 
     createdDate=element.createdAt;
-    packageName=element.securityVulnerability.package.packageName;
+    packageName=element.securityVulnerability.package.name;
     var days =  Math.floor((Date.parse(new Date())-Date.parse(createdDate)  ) / 86400000);
     if(days===1) {
       console.log(`${packageName} created at ${createdDate}`);
